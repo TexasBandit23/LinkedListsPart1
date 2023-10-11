@@ -3,7 +3,7 @@
 
 using namespace std;
 
-bool checkWin(char player);
+bool checkWin(char player, char board[4][4]);
 
 int main()
 {
@@ -12,6 +12,9 @@ int main()
   int playerMove = 1;
   int inputColumn;
   char inputRow;
+  char X = 'X';
+  char O = 'O';
+  int moves = 0;
   
   board[0][0] = ' ';
   board[1][0] = 'a';
@@ -27,10 +30,6 @@ int main()
     }
   }
 
-  if(inputRow == 'a' && inputColumn == 1){
-    board[1][1] = 'X';
-  }
-
   for (int i = 0; i < 4; i++){
     for (int j = 0; j < 4; j++){
       cout << board[i][j];
@@ -44,151 +43,69 @@ int main()
     cout << "Enter the column you would like to play in (1, 2, or 3)." << endl;
     cin >> inputColumn;
 
-    if(inputRow == 'a' && inputColumn == 1 && playerMove == 1 && board[1][1] == '-'){
-      board[1][1] = 'X';
-      if(checkWin('X') == true){
-	stillPlaying == false;
-      }
-      
-      playerMove = 2;
-    }
-    else if(inputRow == 'a' && inputColumn == 2 && playerMove == 1 && board[1][2] == '-'){
-      board[1][2] = 'X';
-      if(checkWin('X') == true){
-        stillPlaying == false;
+    for (int i = 1; i < 4; i++){
+      if(inputRow == 'a' && inputColumn == i && playerMove == 1 && board[1][i] == '-'){
+	board[1][i] = 'X';
+	moves++;
+	if(checkWin(X, board) == true){
+	  cout << "X Wins!" << endl;
+	  stillPlaying = false;
+	}
+	playerMove = 2;
       }
 
-      playerMove = 2;
-[O    }
-    else if(inputRow == 'a' && inputColumn == 3 && playerMove == 1 && board[1][3] == '-'){
-      board[1][3] = 'X';
-      if(checkWin('X') == true){
-        stillPlaying == false;
+      else if(inputRow == 'b' && inputColumn == i && playerMove == 1 && board[2][i] == '-'){
+        board[2][i] = 'X';
+	moves++;
+        if(checkWin(X, board) == true){
+          cout << "X Wins!" << endl;
+          stillPlaying = false;
+        }
+	playerMove = 2;
       }
 
-      playerMove = 2;
-    }
-    else if(inputRow == 'b' && inputColumn == 1 && playerMove == 1 && board[2][1] == '-'){
-      board[2][1] = 'X';
-      if(checkWin('X') == true){
-        stillPlaying == false;
+      else if(inputRow == 'c' && inputColumn == i && playerMove == 1 && board[3][i] == '-'){
+        board[3][i] = 'X';
+	moves++;
+        if(checkWin(X, board) == true){
+          cout << "X Wins!" << endl;
+          stillPlaying = false;
+        }
+	playerMove = 2;
       }
 
-      playerMove = 2;
-    }
-    else if(inputRow == 'b' && inputColumn == 2 && playerMove == 1  && board[2][2] == '-'){
-      board[2][2] = 'X';
-      if(checkWin('X') == true){
-        stillPlaying == false;
+      else if(inputRow == 'a' && inputColumn == i && playerMove == 2 && board[1][i] == '-'){
+        board[1][i] = 'O';
+	moves++;
+        if(checkWin(O, board) == true){
+          cout << "O Wins!" << endl;
+          stillPlaying = false;
+        }
+        playerMove = 1;
       }
 
-      playerMove = 2;
-    }
-    else if(inputRow == 'b' && inputColumn == 3 && playerMove == 1 && board[2][3] == '-'){
-      board[2][3] = 'X';
-      if(checkWin('X') == true){
-        stillPlaying == false;
+      else if(inputRow == 'b' && inputColumn == i && playerMove == 2 && board[2][i] == '-'){
+        board[2][i] = 'O';
+	moves++;
+        if(checkWin(O, board) == true){
+          cout << "O Wins!" << endl;
+          stillPlaying = false;
+        }
+        playerMove = 1;
       }
 
-      playerMove = 2;
-    }
-    else if(inputRow == 'c' && inputColumn == 1 && playerMove == 1 && board[3][1] == '-'){
-      board[3][1] = 'X';
-      if(checkWin('X') == true){
-        stillPlaying == false;
+      else if(inputRow == 'c' && inputColumn == i && playerMove == 2 && board[3][i] == '-'){
+        board[3][i] = 'O';
+	moves++;
+        if(checkWin(O, board) == true){
+          cout << "O Wins!" << endl;
+          stillPlaying = false;
+        }
+        playerMove = 1;
       }
+      else {
 
-      playerMove = 2;
-    }
-    else if(inputRow == 'c' && inputColumn == 2 && playerMove == 1 && board[3][2] == '-'){
-      board[3][2] = 'X';
-      if(checkWin('X') == true){
-        stillPlaying == false;
       }
-
-      playerMove = 2;
-    }
-    else if(inputRow == 'c' && inputColumn == 3 && playerMove == 1 && board[3][3] == '-'){
-      board[3][3] = 'X';
-      if(checkWin('X') == true){
-        stillPlaying == false;
-      }
-
-      playerMove = 2;
-    }
-    else if(inputRow == 'a' && inputColumn == 1 && playerMove == 2 && board[1][1] == '-'){
-      board[1][1] = 'O';
-      if(checkWin('O') == true){
-        stillPlaying == false;
-      }
-
-      playerMove = 1;
-    }
-    else if(inputRow == 'a' && inputColumn == 2 && playerMove == 2 && board[1][2] == '-'){
-      board[1][2] = 'O';
-      if(checkWin('O') == true){
-        stillPlaying == false;
-      }
-      
-      playerMove = 1;
-    }
-    else if(inputRow == 'a' && inputColumn == 3 && playerMove == 2 && board[1][3] == '-'){
-      board[1][3] = 'O';
-      if(checkWin('O') == true){
-        stillPlaying == false;
-      }
-      
-      playerMove = 1;
-    }
-    else if(inputRow == 'b' && inputColumn == 1 && playerMove == 2 && board[2][1] == '-'){
-      board[2][1] = 'O';
-      if(checkWin('O') == true){
-        stillPlaying == false;
-      }
-      
-      playerMove = 1;
-    }
-    else if(inputRow == 'b' && inputColumn == 2 && playerMove == 2 && board[2][2] == '-'){
-      board[2][2] = 'O';
-      if(checkWin('O') == true){
-        stillPlaying == false;
-      }
-      
-      playerMove = 1;
-    }
-    else if(inputRow == 'b' && inputColumn == 3 && playerMove == 2 && board[2][3] == '-'){
-      board[2][3] = 'O';
-      if(checkWin('O') == true){
-        stillPlaying == false;
-      }
-      
-      playerMove = 1;
-    }
-    else if(inputRow == 'c' && inputColumn == 1 && playerMove == 2 && board[3][1] == '-'){
-      board[3][1] = 'O';
-      if(checkWin('O') == true){
-        stillPlaying == false;
-      }
-      
-      playerMove = 1;
-    }
-    else if(inputRow == 'c' && inputColumn == 2 && playerMove == 2 && board[3][2] == '-'){
-      board[3][2] = 'O';
-      if(checkWin('O') == true){
-        stillPlaying == false;
-      }
-      
-      playerMove = 1;
-    }
-    else if(inputRow == 'c' && inputColumn == 3 && playerMove == 2 && board[3][3] == '-'){
-      board[3][3] = 'O';
-      if(checkWin('O') == true){
-        stillPlaying == false;
-      }
-      
-      playerMove = 1;
-    }
-    else{
 
     }
 
@@ -198,10 +115,15 @@ int main()
       }
       cout << "" << endl;
     }
+
+    if(moves >= 9){
+      cout << "It is a Tie!" << endl;
+      stillPlaying = false;
+    }
   }
 }
 
-bool checkWin(char player){
+bool checkWin(char player, char board[4][4]){
   if (board[1][1] == player && board[1][2] == player && board[1][3] == player){
     return true;
   }
@@ -229,12 +151,4 @@ bool checkWin(char player){
   else{
     return false;
   }
-
-
-
-
-
-
-
 }
-# TicTacToe

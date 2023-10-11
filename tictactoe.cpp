@@ -15,6 +15,10 @@ int main()
   char X = 'X';
   char O = 'O';
   int moves = 0;
+  int numWinsX = 0;
+  int numWinsO = 0;
+  int numTies = 0;
+  char input;
   
   board[0][0] = ' ';
   board[1][0] = 'a';
@@ -29,7 +33,9 @@ int main()
       board[i][j] = '-';
     }
   }
-
+  cout << "X Wins: " << numWinsX << endl;
+  cout << "O Wins: " << numWinsO << endl;
+  cout << "Ties: " << numTies << endl;
   for (int i = 0; i < 4; i++){
     for (int j = 0; j < 4; j++){
       cout << board[i][j];
@@ -49,6 +55,7 @@ int main()
 	moves++;
 	if(checkWin(X, board) == true){
 	  cout << "X Wins!" << endl;
+	  numWinsX++;
 	  stillPlaying = false;
 	}
 	playerMove = 2;
@@ -59,6 +66,7 @@ int main()
 	moves++;
         if(checkWin(X, board) == true){
           cout << "X Wins!" << endl;
+	  numWinsX++;
           stillPlaying = false;
         }
 	playerMove = 2;
@@ -69,6 +77,7 @@ int main()
 	moves++;
         if(checkWin(X, board) == true){
           cout << "X Wins!" << endl;
+	  numWinsX++;
           stillPlaying = false;
         }
 	playerMove = 2;
@@ -79,6 +88,7 @@ int main()
 	moves++;
         if(checkWin(O, board) == true){
           cout << "O Wins!" << endl;
+	  numWinsO++;
           stillPlaying = false;
         }
         playerMove = 1;
@@ -89,6 +99,7 @@ int main()
 	moves++;
         if(checkWin(O, board) == true){
           cout << "O Wins!" << endl;
+	  numWinsO++;
           stillPlaying = false;
         }
         playerMove = 1;
@@ -99,6 +110,7 @@ int main()
 	moves++;
         if(checkWin(O, board) == true){
           cout << "O Wins!" << endl;
+	  numWinsO++;
           stillPlaying = false;
         }
         playerMove = 1;
@@ -109,6 +121,16 @@ int main()
 
     }
 
+    if(moves >= 9){
+      cout << "It is a Tie!" << endl;
+      numTies++;
+      stillPlaying = false;
+    }
+
+
+    cout << "X Wins: " << numWinsX << endl;
+    cout << "O Wins: " << numWinsO << endl;
+    cout << "Ties: " << numTies << endl;
     for (int i = 0; i < 4; i++){
       for (int j = 0; j < 4; j++){
 	cout << board[i][j];
@@ -116,9 +138,36 @@ int main()
       cout << "" << endl;
     }
 
-    if(moves >= 9){
-      cout << "It is a Tie!" << endl;
-      stillPlaying = false;
+    if(stillPlaying == false){
+      cout << "Play Again? (y or n)" << endl;
+      cin >> input;
+      if(input == 'n'){
+	stillPlaying = false;
+      }
+      else if (input == 'y'){
+	 for (int i = 1; i < 4; i++){
+	   for (int j = 1; j < 4; j++){
+	     board[i][j] = '-';
+	   }
+	 }
+
+	  cout << "X Wins: " << numWinsX << endl;
+	  cout << "O Wins: " << numWinsO << endl;
+	  cout << "Ties: " << numTies << endl;
+	  for (int i = 0; i < 4; i++){
+	    for (int j = 0; j < 4; j++){
+	      cout << board[i][j];
+	    }
+	    cout << "" << endl;
+	  }
+	  stillPlaying = true;
+	  playerMove = 1;
+	  moves = 0;
+      }
+      
+      else {
+	stillPlaying = false;
+      }
     }
   }
 }

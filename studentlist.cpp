@@ -33,17 +33,14 @@ int main(){
       cout << "ADD!" << endl;
       add(StudentList);
     }
-
     else if ((strcmp(input, "REMOVE")) == 0){
       cout << "REMOVE!" << endl;
       remove(StudentList);
     }
-
     else if ((strcmp(input, "PRINT")) == 0){
       cout << "PRINT!" << endl;
       print(StudentList);
     }
-
     else if ((strcmp(input, "QUIT")) == 0){
       cout << "QUIT!" << endl;
       running = false;
